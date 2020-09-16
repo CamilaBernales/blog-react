@@ -10,6 +10,7 @@ const Alta = () => {
   });
   const { title, body } = post;
   const [error, setError] = useState(false);
+  const[msgError, setMsgError] =  useState("");
   const onChangeForm = (e) => {
     setError(false);
     setPost({
@@ -21,6 +22,7 @@ const Alta = () => {
     e.preventDefault();
     if (title.trim() === "" || body.trim() === "") {
       setError(true);
+      setMsgError("Hubo un error.")
       return;
     }
     fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -39,12 +41,15 @@ const Alta = () => {
         datosLS.push(post);
         localStorage.setItem("post_filtrados", JSON.stringify(datosLS));
       })
-      .catch((err) => console.log("error", err));
+      .catch((err) => {
+        setError(true)
+        setMsgError("Hubo un error.")
+      });
   };
   return (
     <Container className="m-auto ">
       {error ? (
-        <Alert variant="danger">Los campos deben estar completos</Alert>
+        <Alert variant="danger">{msgError}</Alert>
       ) : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} md={8} xl={6} lg={8} className=" mx-3 my-3">
