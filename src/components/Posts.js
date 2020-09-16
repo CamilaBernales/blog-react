@@ -3,7 +3,9 @@ import Post from "./Post";
 import { Row } from "react-bootstrap";
 
 const Posts = () => {
-  const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("post_filtrados")) || []);
+  const [posts, setPosts] = useState(
+    JSON.parse(localStorage.getItem("post_filtrados")) || []
+  );
 
   const obtenerPost = async () => {
     const solicitud = await fetch(
@@ -22,7 +24,7 @@ const Posts = () => {
     }
   };
   useEffect(() => {
-      obtenerPost();
+    obtenerPost();
   }, []);
 
   return (

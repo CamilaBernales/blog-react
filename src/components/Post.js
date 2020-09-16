@@ -6,9 +6,9 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
   const [error, setError] = useState(false);
 
-  const eliminarPost = (id) => {
+  const eliminarPost = async (id) => {
     setError(false);
-    fetch(
+    await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}
     `,
       {
