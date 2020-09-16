@@ -13,4 +13,4 @@
   <li type="square">npm start</li>
 </ul>
 <p>Puedes mirar el proyecto acá:</p>
-<a target="_blank" rel="noopener noreferrer" href=""><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+<a target="_blank" rel="noopener noreferrer" href="https://blog-alkemy.vercel.app/"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
