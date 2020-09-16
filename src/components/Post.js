@@ -1,14 +1,14 @@
-import React,{useState} from "react";
-import {Link} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Col, Card, Row, Button, Alert, Container } from "react-bootstrap";
-import Swal from 'sweetalert2' 
+import Swal from "sweetalert2";
 const Post = ({ post }) => {
-  const { body, title, id } = post;
+  const { title, id } = post;
 
   const [error, setError] = useState(false);
 
   const eliminarPost = (id) => {
-    setError(false)
+    setError(false);
     fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}
     `,
@@ -16,24 +16,24 @@ const Post = ({ post }) => {
         method: "DELETE",
       }
     )
-      .then((res) =>{
+      .then((res) => {
         Swal.fire({
-            title: '¿Estas seguro?',
-            text: "No podras revertir esta acción", 
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Eliminado!',
-                'El post fue elimnado con éxito.',
-                'success'
-              )
-            }
-          })
+          title: "¿Estas seguro?",
+          text: "No podras revertir esta acción",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí, eliminar!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              "Eliminado!",
+              "El post fue elimnado con éxito.",
+              "success"
+            );
+          }
+        });
       })
       .catch((error) => {
         setError(true);
@@ -44,7 +44,7 @@ const Post = ({ post }) => {
     <Container className="my-4">
       {error ? <Alert variant="danger">Hubo un error</Alert> : null}
       <Col>
-        <Card border="info" className="my-2">
+        <Card key={id} border="info" className="my-2">
           <Card.Body className="text-justify">
             <Card.Title>{title}</Card.Title>
           </Card.Body>
@@ -59,7 +59,9 @@ const Post = ({ post }) => {
             <Button variant="warning" className="ml-auto mx-1">
               Editar
             </Button>{" "}
-            <Button variant="info">Detalle</Button>{" "}
+            <Link to={`/post/detalle/${id}`}>
+              <Button variant="info">Detalle</Button>{" "}
+            </Link>
           </Row>
         </Card>
       </Col>
