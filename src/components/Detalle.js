@@ -7,24 +7,24 @@ const Detalle = () => {
   const [post, setPost] = useState(false);
 
   const fetchData = async () => {
-    console.log(id);
     const solicitud = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}`
     );
     const respuesta = await solicitud.json();
     let postGuardados = JSON.parse(localStorage.getItem("post_filtrados"));
-    let postBuscado = postGuardados.find((post) => post.id == respuesta.id);
-    if (postBuscado == undefined) {
+    let postBuscado = postGuardados.find((post) => post.id === respuesta.id);
+    if (postBuscado === undefined) {
       setError(true);
     }
     setPost(postBuscado);
   };
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
   return (
-    <Container className="my-4 ">
-      <Row className="text-justify m-auto d-flex justify-content-center">
+    <Container className="m-auto">
+      <Row className="text-justify d-flex justify-content-center align-items-center">
         {error ? (
           <Alert variant="danger">
             El post que esta buscando no esta disponible o fue eliminado.

@@ -12,7 +12,7 @@ const Posts = () => {
       ` https://jsonplaceholder.typicode.com/posts`
     );
     var respuesta = await solicitud.json();
-    localStorage.setItem("post_filtrados", JSON.stringify(respuesta));
+    localStorage.setItem("post_filtrados", JSON.stringify(respuesta))
     setPosts(respuesta);
   };
   const obtenerPostsFiltrados = (id) => {
@@ -24,7 +24,10 @@ const Posts = () => {
     }
   };
   useEffect(() => {
-    obtenerPost();
+    if (posts.length === 0) {
+      obtenerPost();
+    }
+    // eslint-disable-next-line
   }, []);
 
   return (
