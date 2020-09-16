@@ -7,7 +7,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
   const [error, setError] = useState(false);
 
-  const eliminarPost = async (id) => {
+  const deletePost = async (id) => {
     setError(false);
     await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}
@@ -17,13 +17,13 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
       }
     );
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "¿Estas seguro?",
+      text: "No podras revertir estas acción",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Sí, eliminar.",
     })
       .then((result) => {
         if (result.isConfirmed) {
@@ -50,7 +50,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
               variant="danger"
               className="ml-auto mx-1"
               onClick={() => {
-                eliminarPost(id);
+                deletePost(id);
               }}
             >
               Eliminar

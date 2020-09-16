@@ -65,10 +65,12 @@ const Update = () => {
 
   useEffect(() => {
     localStorage.setItem("post_filtrados", JSON.stringify(postsStorage));
+     // eslint-disable-next-line
   }, [postsStorage]);
 
   useEffect(() => {
-    fetchPost();
+      fetchPost();
+      // eslint-disable-next-line
   }, []);
 
   return (
