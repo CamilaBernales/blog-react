@@ -8,12 +8,12 @@ const Posts = () => {
   );
 
   const obtenerPost = async () => {
-    const solicitud = await fetch(
+    const request = await fetch(
       ` https://jsonplaceholder.typicode.com/posts`
     );
-    var respuesta = await solicitud.json();
-    localStorage.setItem("post_filtrados", JSON.stringify(respuesta))
-    setPosts(respuesta);
+    var res = await request.json();
+    localStorage.setItem("post_filtrados", JSON.stringify(res))
+    setPosts(res);
   };
   const obtenerPostsFiltrados = (id) => {
     if (id !== 0) {

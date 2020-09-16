@@ -7,12 +7,12 @@ const Detalle = () => {
   const [post, setPost] = useState(false);
 
   const fetchData = async () => {
-    const solicitud = await fetch(
+    const request = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}`
     );
-    const respuesta = await solicitud.json();
+    const res = await request.json();
     let postGuardados = JSON.parse(localStorage.getItem("post_filtrados"));
-    let postBuscado = postGuardados.find((post) => post.id === respuesta.id);
+    let postBuscado = postGuardados.find((post) => post.id === res.id);
     if (postBuscado === undefined) {
       setError(true);
     }

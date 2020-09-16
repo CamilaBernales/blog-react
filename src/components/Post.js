@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Card, Row, Button, Alert, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
+
 const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
   const [error, setError] = useState(false);
@@ -26,12 +27,12 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          obtenerPostsFiltrados(id)
+          obtenerPostsFiltrados(id);
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         setError(true);
       });
   };
@@ -48,13 +49,17 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
             <Button
               variant="danger"
               className="ml-auto mx-1"
-              onClick={() => {eliminarPost(id)}}
+              onClick={() => {
+                eliminarPost(id);
+              }}
             >
               Eliminar
             </Button>{" "}
-            <Button variant="warning" className="ml-auto mx-1">
-              Editar
-            </Button>{" "}
+            <Link to={`/post/update/${id}`}>
+              <Button variant="warning" className="ml-auto mx-1">
+                Editar
+              </Button>{" "}
+            </Link>
             <Link to={`/post/detalle/${id}`}>
               <Button variant="info">Detalle</Button>{" "}
             </Link>

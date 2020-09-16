@@ -1,62 +1,83 @@
-import React, { useState } from "react";
-import postalta from "../images/postalta.svg";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
-const Alta = () => {
-  const [post, setPost] = useState({
+import Swal from "sweetalert2";
+
+const Update = () => {
+  let { id } = useParams();
+  const [post, setPost] = useState({});
+  const [postUpdated, setPostUpdated] = useState({
     title: "",
     body: "",
   });
-  const { title, body } = post;
   const [error, setError] = useState(false);
   const [msgError, setMsgError] = useState("");
+  const [postsStorage, setpostsStorage] = useState(
+    JSON.parse(localStorage.getItem("post_filtrados")) || []
+  );
+  const fetchPost = async () => {
+    const request = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+    const res = await request.json();
+    setPost(res);
+  };
 
-  const onChangeForm = (e) => {
+  const onChangePost = (e) => {
     setError(false);
-    setPost({
-      ...post,
+    setPostUpdated({
+      id: post.id,
+      userId: post.userId,
+      ...postUpdated,
       [e.target.name]: e.target.value,
     });
   };
 
-  const savePost = async (e) => {
+  const updatePost = async (e) => {
     e.preventDefault();
-    if (title.trim() === "" || body.trim() === "") {
+    if (postUpdated.title.trim() === "" || postUpdated.body.trim() === "") {
       setError(true);
       setMsgError("Los campos no deben estar vacios.");
       return;
     }
-    await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: post,
+    setpostsStorage([
+      ...postsStorage.filter((posts) => posts.id !== postUpdated.id),
+      postUpdated,
+    ]);
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "PUT",
+      body: postUpdated,
     })
       .then(() => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Posteo guardado con éxito.",
+          title: "Posteo editado con éxito.",
           showConfirmButton: false,
           timer: 1500,
         });
-        let datosLS = JSON.parse(localStorage.getItem("post_filtrados")) || [];
-        datosLS.push(post);
-        localStorage.setItem("post_filtrados", JSON.stringify(datosLS));
       })
       .catch(() => {
         setError(true);
         setMsgError("Hubo un error.");
       });
   };
+
+  useEffect(() => {
+    localStorage.setItem("post_filtrados", JSON.stringify(postsStorage));
+  }, [postsStorage]);
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
   return (
     <Container className="m-auto">
       {error ? <Alert variant="danger">{msgError}</Alert> : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
-        <Col sm={12} md={8} xl={6} lg={8} className=" mx-3 my-3">
-          <img src={postalta} className="img-fluid" alt="imagen login" />
-        </Col>
         <Col sm={12} lg={6} md={8} xl={5}>
-          <Form onSubmit={savePost}>
-            <h3 className="text-center mb-3 pb-2">Nuevo Post</h3>
+          <Form onSubmit={updatePost}>
+            <h3 className="text-center mb-3 pb-2">Modificar Post</h3>
             <Form.Group>
               <Form.Label className=" d-flex justify-content-start">
                 Titulo:
@@ -66,9 +87,9 @@ const Alta = () => {
                 placeholder="Ingrese el titulo del post"
                 className="rounded-left"
                 name="title"
-                value={title}
-                onChange={onChangeForm}
-                maxLength="40"
+                maxLength="100"
+                // defaultValue={post.title}
+                onChange={onChangePost}
               />
             </Form.Group>
             <Form.Group>
@@ -81,8 +102,8 @@ const Alta = () => {
                 className="rounded-left"
                 type="text"
                 name="body"
-                value={body}
-                onChange={onChangeForm}
+                // defaultValue={post.body}
+                onChange={onChangePost}
                 maxLength="150"
               />
             </Form.Group>
@@ -90,7 +111,7 @@ const Alta = () => {
               <Col className="justify-content-center mb-3">
                 <Button
                   variant="info"
-                  className="text-white btn my-2 btn-button w-100"
+                  className="text-white btn btn-button my-3 w-100"
                   type="submit"
                 >
                   Guardar
@@ -104,4 +125,4 @@ const Alta = () => {
   );
 };
 
-export default Alta;
+export default Update;
