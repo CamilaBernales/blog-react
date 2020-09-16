@@ -75,7 +75,7 @@ const Update = () => {
 
   return (
     <Container className="m-auto">
-      {error ? <Alert variant="danger">{msgError}</Alert> : null}
+      {error ? <Alert className="text-center" variant="danger">{msgError}</Alert> : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} lg={6} md={8} xl={5}>
           <Form onSubmit={updatePost} className="form-update p-3">

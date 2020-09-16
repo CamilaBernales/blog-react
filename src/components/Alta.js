@@ -52,7 +52,7 @@ const Alta = () => {
   };
   return (
     <Container className="m-auto">
-      {error ? <Alert variant="danger">{msgError}</Alert> : null}
+      {error ? <Alert className="text-center" variant="danger">{msgError}</Alert> : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} md={8} xl={6} lg={8} className=" mx-3 my-3">
           <img src={postalta} className="img-fluid" alt="imagen login" />

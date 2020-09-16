@@ -26,7 +26,7 @@ const Detalle = () => {
     <Container className="m-auto">
       <Row className="text-justify d-flex justify-content-center align-items-center">
         {error ? (
-          <Alert variant="danger">
+          <Alert variant="danger" className="text-center">
             El post que esta buscando no esta disponible o fue eliminado.
           </Alert>
         ) : (

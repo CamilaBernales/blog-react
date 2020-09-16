@@ -39,7 +39,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
 
   return (
     <Container className="my-4">
-      {error ? <Alert variant="danger">Hubo un error</Alert> : null}
+      {error ? <Alert className="text-center" variant="danger">Hubo un error</Alert> : null}
       <Row className="d-flex justify-content-center align-items-center">
         <Col sm={12} md={8} lg={8}>
           <Card key={id} border="info" className="my-2 post">
