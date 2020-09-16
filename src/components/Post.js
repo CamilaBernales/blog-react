@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Card, Row, Button, Alert, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
+import "../css/style.css";
 
 const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
@@ -31,8 +32,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setError(true);
       });
   };
@@ -40,32 +40,39 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
   return (
     <Container className="my-4">
       {error ? <Alert variant="danger">Hubo un error</Alert> : null}
-      <Col>
-        <Card key={id} border="info" className="my-2">
-          <Card.Body className="text-justify">
-            <Card.Title>{title}</Card.Title>
-          </Card.Body>
-          <Row className="ml-auto mx-1">
-            <Button
-              variant="danger"
-              className="ml-auto mx-1"
-              onClick={() => {
-                deletePost(id);
-              }}
-            >
-              Eliminar
-            </Button>{" "}
-            <Link to={`/post/update/${id}`}>
-              <Button variant="warning" className="ml-auto mx-1">
-                Editar
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col sm={12} md={8} lg={8}>
+          <Card key={id} border="info" className="my-2 post">
+            <Card.Body className="text-justify">
+              <Card.Title>{title}</Card.Title>
+            </Card.Body>
+            <Row className="ml-auto mx-1">
+              <Button
+                variant="danger"
+                className="ml-auto mx-1 btn btn-delete"
+                onClick={() => {
+                  deletePost(id);
+                }}
+              >
+                Eliminar
               </Button>{" "}
-            </Link>
-            <Link to={`/post/detalle/${id}`}>
-              <Button variant="info">Detalle</Button>{" "}
-            </Link>
-          </Row>
-        </Card>
-      </Col>
+              <Link to={`/post/update/${id}`}>
+                <Button
+                  variant="warning"
+                  className="ml-auto mx-1 btn-editar btn"
+                >
+                  Editar
+                </Button>{" "}
+              </Link>
+              <Link to={`/post/detalle/${id}`}>
+                <Button className="btn-detalle btn">
+                  Detalle
+                </Button>{" "}
+              </Link>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 };

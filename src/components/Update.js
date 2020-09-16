@@ -78,7 +78,7 @@ const Update = () => {
       {error ? <Alert variant="danger">{msgError}</Alert> : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} lg={6} md={8} xl={5}>
-          <Form onSubmit={updatePost}>
+          <Form onSubmit={updatePost} className="form-update p-3">
             <h3 className="text-center mb-3 pb-2">Modificar Post</h3>
             <Form.Group>
               <Form.Label className=" d-flex justify-content-start">
@@ -112,8 +112,7 @@ const Update = () => {
             <Row>
               <Col className="justify-content-center mb-3">
                 <Button
-                  variant="info"
-                  className="text-white btn btn-button my-3 w-100"
+                  className="text-white btn btn-update btn-button my-3 w-100"
                   type="submit"
                 >
                   Guardar

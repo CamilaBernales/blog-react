@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import postalta from "../images/postalta.svg";
 import Swal from "sweetalert2";
 import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
+import "../css/style.css";
+
+
 const Alta = () => {
   const [post, setPost] = useState({
     title: "",
@@ -55,7 +58,7 @@ const Alta = () => {
           <img src={postalta} className="img-fluid" alt="imagen login" />
         </Col>
         <Col sm={12} lg={6} md={8} xl={5}>
-          <Form onSubmit={savePost}>
+          <Form onSubmit={savePost} className="form-alta p-4">
             <h3 className="text-center mb-3 pb-2">Nuevo Post</h3>
             <Form.Group>
               <Form.Label className=" d-flex justify-content-start">
@@ -89,8 +92,7 @@ const Alta = () => {
             <Row>
               <Col className="justify-content-center mb-3">
                 <Button
-                  variant="info"
-                  className="text-white btn my-2 btn-button w-100"
+                  className="text-white btn my-2 btn-button w-100 btn-alta btn"
                   type="submit"
                 >
                   Guardar

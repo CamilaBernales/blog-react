@@ -34,7 +34,7 @@ const Posts = () => {
     <Row className="d-flex justify-content-center align-items-center">
       {posts.map((post) => (
         <Post
-          id={post.id}
+          key={post.id}
           post={post}
           obtenerPostsFiltrados={obtenerPostsFiltrados}
         />
