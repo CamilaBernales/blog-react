@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Card, Row, Button, Alert, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
-const Post = ({ post, obtenerPost }) => {
+const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
-
   const [error, setError] = useState(false);
 
   const eliminarPost = (id) => {
-    console.log(id)
     setError(false);
     fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}
@@ -28,11 +26,12 @@ const Post = ({ post, obtenerPost }) => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          obtenerPost(id)
+          obtenerPostsFiltrados(id)
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       })
       .catch((error) => {
+        console.log(error)
         setError(true);
       });
   };

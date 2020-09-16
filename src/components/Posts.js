@@ -3,34 +3,36 @@ import Post from "./Post";
 import { Row } from "react-bootstrap";
 
 const Posts = () => {
-  const [posts, setPosts] = useState(
-    JSON.parse(localStorage.getItem("post_filtrados")) || []
-  );
-  const obtenerPost = async (id = 0) => {
+  const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("post_filtrados")) || []);
+
+  const obtenerPost = async () => {
     const solicitud = await fetch(
       ` https://jsonplaceholder.typicode.com/posts`
     );
-    if (id != 0) {
-      var respuesta = await solicitud.json();
-      let filtro = respuesta.filter((post) => post.id !== id);
-      let filtrados = localStorage.setItem(
-        "post_filtrados",
-        JSON.stringify(filtro)
-      );
-      setPosts(JSON.parse(localStorage.getItem("post_filtrados")));
-    } else {
-      respuesta = await solicitud.json();
-      setPosts(respuesta);
+    var respuesta = await solicitud.json();
+    localStorage.setItem("post_filtrados", JSON.stringify(respuesta));
+    setPosts(respuesta);
+  };
+  const obtenerPostsFiltrados = (id) => {
+    if (id !== 0) {
+      let postGuardados = JSON.parse(localStorage.getItem("post_filtrados"));
+      let filtro = postGuardados.filter((post) => post.id !== id);
+      localStorage.setItem("post_filtrados", JSON.stringify(filtro));
+      setPosts(filtro);
     }
   };
-
   useEffect(() => {
-    obtenerPost();
+      obtenerPost();
   }, []);
+
   return (
     <Row className="d-flex justify-content-center align-items-center">
       {posts.map((post) => (
-        <Post id={post.id} post={post} obtenerPost={obtenerPost} />
+        <Post
+          id={post.id}
+          post={post}
+          obtenerPostsFiltrados={obtenerPostsFiltrados}
+        />
       ))}
     </Row>
   );
