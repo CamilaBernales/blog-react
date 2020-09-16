@@ -3,14 +3,16 @@ import Post from "./Post";
 import { Row } from "react-bootstrap";
 
 const Posts = () => {
-  const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("post_filtrados")) || []);
+  const [posts, setPosts] = useState(
+    JSON.parse(localStorage.getItem("post_filtrados")) || []
+  );
 
   const obtenerPost = async () => {
     const solicitud = await fetch(
       ` https://jsonplaceholder.typicode.com/posts`
     );
     var respuesta = await solicitud.json();
-    localStorage.setItem("post_filtrados", JSON.stringify(respuesta));
+    localStorage.setItem("post_filtrados", JSON.stringify(respuesta))
     setPosts(respuesta);
   };
   const obtenerPostsFiltrados = (id) => {
@@ -22,7 +24,10 @@ const Posts = () => {
     }
   };
   useEffect(() => {
+    if (posts.length === 0) {
       obtenerPost();
+    }
+    // eslint-disable-next-line
   }, []);
 
   return (
