@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
