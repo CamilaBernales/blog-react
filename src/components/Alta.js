@@ -94,6 +94,7 @@ const Alta = () => {
                 <Button
                   className="text-white btn my-2 btn-button w-100 btn-alta btn"
                   type="submit"
+                  variant="dark"
                 >
                   Guardar
                 </Button>

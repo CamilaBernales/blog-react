@@ -114,6 +114,7 @@ const Update = () => {
                 <Button
                   className="text-white btn btn-update btn-button my-3 w-100"
                   type="submit"
+                  variant="dark"
                 >
                   Guardar
                 </Button>

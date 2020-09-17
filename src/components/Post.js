@@ -39,8 +39,12 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
 
   return (
     <Container className="my-4">
-      {error ? <Alert className="text-center" variant="danger">Hubo un error</Alert> : null}
       <Row className="d-flex justify-content-center align-items-center">
+        {error ? (
+          <Alert className="text-center" variant="danger">
+            Hubo un error
+          </Alert>
+        ) : null}
         <Col sm={12} md={8} lg={8}>
           <Card key={id} border="info" className="my-2 post">
             <Card.Body className="text-justify">
@@ -49,7 +53,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
             <Row className="ml-auto mx-1">
               <Button
                 variant="danger"
-                className="ml-auto mx-1 btn btn-delete"
+                className="ml-auto mx-2 mb-2 btn btn-delete"
                 onClick={() => {
                   deletePost(id);
                 }}
@@ -59,13 +63,13 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
               <Link to={`/post/update/${id}`}>
                 <Button
                   variant="warning"
-                  className="ml-auto mx-1 btn-editar btn"
+                  className="ml-auto mx-2 mb-2 btn-editar btn"
                 >
                   Editar
                 </Button>{" "}
               </Link>
               <Link to={`/post/detalle/${id}`}>
-                <Button className="btn-detalle btn">
+                <Button variant="dark" className="ml-auto mx-2 mb-2 btn-detalle btn">
                   Detalle
                 </Button>{" "}
               </Link>
