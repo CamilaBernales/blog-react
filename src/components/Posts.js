@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { Row } from "react-bootstrap";
+import {Container } from "react-bootstrap";
 
 const Posts = () => {
   const [posts, setPosts] = useState(
@@ -30,8 +30,8 @@ const Posts = () => {
     // eslint-disable-next-line
   }, []);
 
-  return (
-    <Row className="d-flex justify-content-center align-items-center">
+  return ( 
+    <Container>
       {posts.map((post) => (
         <Post
           key={post.id}
@@ -39,7 +39,7 @@ const Posts = () => {
           obtenerPostsFiltrados={obtenerPostsFiltrados}
         />
       ))}
-    </Row>
+    </Container>
   );
 };
 
