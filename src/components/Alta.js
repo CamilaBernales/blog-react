@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
 import "../css/style.css";
 
-
 const Alta = () => {
   const [post, setPost] = useState({
     title: "",
@@ -44,6 +43,10 @@ const Alta = () => {
         let datosLS = JSON.parse(localStorage.getItem("post_filtrados")) || [];
         datosLS.push(post);
         localStorage.setItem("post_filtrados", JSON.stringify(datosLS));
+        setPost({
+          title: "",
+          body: "",
+        });
       })
       .catch(() => {
         setError(true);
@@ -52,7 +55,11 @@ const Alta = () => {
   };
   return (
     <Container className="m-auto">
-      {error ? <Alert className="text-center" variant="danger">{msgError}</Alert> : null}
+      {error ? (
+        <Alert className="text-center" variant="danger">
+          {msgError}
+        </Alert>
+      ) : null}
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} md={8} xl={6} lg={8} className=" mx-3 my-3">
           <img src={postalta} className="img-fluid" alt="imagen login" />

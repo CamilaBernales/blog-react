@@ -7,7 +7,7 @@ const Posts = () => {
     JSON.parse(localStorage.getItem("post_filtrados")) || []
   );
 
-  const obtenerPost = async () => {
+  const obtenerPosts = async () => {
     const request = await fetch(
       ` https://jsonplaceholder.typicode.com/posts`
     );
@@ -25,7 +25,7 @@ const Posts = () => {
   };
   useEffect(() => {
     if (posts.length === 0) {
-      obtenerPost();
+      obtenerPosts();
     }
     // eslint-disable-next-line
   }, []);
