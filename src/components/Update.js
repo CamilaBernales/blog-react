@@ -79,7 +79,7 @@ const Update = () => {
       <Row className="px-5 d-flex justify-content-center align-items-center ">
         <Col sm={12} lg={6} md={8} xl={5}>
           <Form onSubmit={updatePost} className="form-update p-3">
-            <h3 className="text-center mb-3 pb-2">Modificar Post</h3>
+            <h3 className="text-center mb-3 pb-2">Editar Post</h3>
             <Form.Group>
               <Form.Label className=" d-flex justify-content-start">
                 Titulo:

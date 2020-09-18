@@ -36,7 +36,7 @@ const Alta = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Posteo guardado con éxito.",
+          title: "Post guardado con éxito.",
           showConfirmButton: false,
           timer: 1500,
         });

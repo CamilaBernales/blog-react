@@ -29,7 +29,7 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
       .then((result) => {
         if (result.isConfirmed) {
           obtenerPostsFiltrados(id);
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire("Post eliminado", "El post fue eliminado con éxito.", "success");
         }
       })
       .catch(() => {
