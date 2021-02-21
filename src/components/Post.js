@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Card, Row, Button, Alert, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
+import "../css/style.css";
+
 const Post = ({ post, obtenerPostsFiltrados }) => {
   const { title, id } = post;
   const [error, setError] = useState(false);
 
-  const eliminarPost = (id) => {
+  const deletePost = async (id) => {
     setError(false);
-    fetch(
+    await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}
     `,
       {
@@ -16,51 +18,65 @@ const Post = ({ post, obtenerPostsFiltrados }) => {
       }
     );
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "¿Estas seguro?",
+      text: "No podras revertir estas acción",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Sí, eliminar.",
     })
       .then((result) => {
         if (result.isConfirmed) {
-          obtenerPostsFiltrados(id)
+          obtenerPostsFiltrados(id);
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         setError(true);
       });
   };
 
   return (
     <Container className="my-4">
-      {error ? <Alert variant="danger">Hubo un error</Alert> : null}
-      <Col>
-        <Card key={id} border="info" className="my-2">
-          <Card.Body className="text-justify">
-            <Card.Title>{title}</Card.Title>
-          </Card.Body>
-          <Row className="ml-auto mx-1">
-            <Button
-              variant="danger"
-              className="ml-auto mx-1"
-              onClick={() => {eliminarPost(id)}}
-            >
-              Eliminar
-            </Button>{" "}
-            <Button variant="warning" className="ml-auto mx-1">
-              Editar
-            </Button>{" "}
-            <Link to={`/post/detalle/${id}`}>
-              <Button variant="info">Detalle</Button>{" "}
-            </Link>
-          </Row>
-        </Card>
-      </Col>
+      <Row className="d-flex justify-content-center align-items-center">
+        {error ? (
+          <Alert className="text-center" variant="danger">
+            Hubo un error
+          </Alert>
+        ) : null}
+        <Col sm={12} md={8} lg={8}>
+          <Card key={id} border="info" className="my-2 post">
+            <Card.Body className="text-justify">
+              <Card.Title>{title}</Card.Title>
+            </Card.Body>
+            <Row className="ml-auto mx-1">
+              <Button
+                variant="danger"
+                className="ml-auto mx-2 mb-2 btn btn-delete"
+                onClick={() => {
+                  deletePost(id);
+                }}
+              >
+                Eliminar
+              </Button>{" "}
+              <Link to={`/post/update/${id}`}>
+                <Button
+                  variant="warning"
+                  className="ml-auto mx-2 mb-2 btn-editar btn"
+                >
+                  Editar
+                </Button>{" "}
+              </Link>
+              <Link to={`/post/detalle/${id}`}>
+                <Button variant="dark" className="ml-auto mx-2 mb-2 btn-detalle btn">
+                  Detalle
+                </Button>{" "}
+              </Link>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 };

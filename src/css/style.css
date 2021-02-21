@@ -1,0 +1,26 @@
+.post{
+    box-shadow: 2px 2px 12px 3px rgba(0,0,0,0.25);
+    border: black !important;
+}
+.btn{
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.25);
+    color: #fff;
+}
+.btn-editar{
+    background: #ff9100 ;
+}
+.btn-detalle, .btn-alta, .btn-update{
+    background:  #6c56be;
+    border: #6c56be 2px solid;
+}
+
+.btn-detalle:hover, .btn-alta:hover, .btn-update:hover{
+    background:  #6c56be;
+}
+.btn-delete{
+    background: #b71c1c ;
+}
+.form-alta, .form-update{
+    border:  1px #6c56be;
+    border-style: dotted;
+}

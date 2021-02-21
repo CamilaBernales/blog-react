@@ -3,14 +3,14 @@ import {Navbar, Nav} from 'react-bootstrap'
 const Header = () => {
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Blog</Navbar.Brand>
+      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar.Brand href="/">Blog</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#">
-              Dank memes
+          <Nav className="ml-auto">
+            <Nav.Link href="/">Posts</Nav.Link>
+            <Nav.Link eventKey={2} href="/post/alta">
+             Nuevo Post
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

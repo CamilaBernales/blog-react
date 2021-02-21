@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Posts from "./components/Posts";
 import Detalle from "./components/Detalle";
+import Alta from "./components/Alta";
+import Update from "./components/Update";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
@@ -13,8 +16,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={Posts} />
           <Route exact path="/post/detalle/:id" component={Detalle} />
+          <Route exact path="/post/alta" component={Alta} />
+          <Route exact path="/post/update/:id" component={Update} />
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }

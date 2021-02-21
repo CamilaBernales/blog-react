@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { Row } from "react-bootstrap";
+import {Container } from "react-bootstrap";
 
 const Posts = () => {
-  const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("post_filtrados")) || []);
+  const [posts, setPosts] = useState(
+    JSON.parse(localStorage.getItem("post_filtrados")) || []
+  );
 
   const obtenerPost = async () => {
-    const solicitud = await fetch(
+    const request = await fetch(
       ` https://jsonplaceholder.typicode.com/posts`
     );
-    var respuesta = await solicitud.json();
-    localStorage.setItem("post_filtrados", JSON.stringify(respuesta));
-    setPosts(respuesta);
+    var res = await request.json();
+    localStorage.setItem("post_filtrados", JSON.stringify(res))
+    setPosts(res);
   };
   const obtenerPostsFiltrados = (id) => {
     if (id !== 0) {
@@ -22,19 +24,22 @@ const Posts = () => {
     }
   };
   useEffect(() => {
+    if (posts.length === 0) {
       obtenerPost();
+    }
+    // eslint-disable-next-line
   }, []);
 
-  return (
-    <Row className="d-flex justify-content-center align-items-center">
+  return ( 
+    <Container>
       {posts.map((post) => (
         <Post
-          id={post.id}
+          key={post.id}
           post={post}
           obtenerPostsFiltrados={obtenerPostsFiltrados}
         />
       ))}
-    </Row>
+    </Container>
   );
 };
 
